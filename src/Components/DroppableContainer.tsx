@@ -25,6 +25,7 @@ const DroppableContainer = ({
     //   return r.current.getBoundingClientRect();
     // });
     // console.log("Getting item positions", itemPositions);
+    console.log("Map state: ", getDragabbleItemsMap());
   };
   const onDropEvent = (e: React.DragEvent) => {
     e.clientX;
@@ -49,7 +50,7 @@ const DroppableContainer = ({
         <DraggleItem
           itemRef={(node: HTMLLIElement): void => {
             const map = getDragabbleItemsMap();
-            if (!node) {
+            if (node) {
               map.set(i, node);
             } else {
               map.delete(i);
