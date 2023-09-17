@@ -58,6 +58,7 @@ const DroppableContainer = ({
           index={i}
           key={i}
           onDragStart={getItemPositions}
+          onDragStyle="dragging"
         >
           {item.name}
         </DraggleItem>

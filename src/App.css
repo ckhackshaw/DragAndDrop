@@ -23,3 +23,7 @@ li {
   color: whitesmoke;
   cursor: pointer;
 }
+
+.dragging {
+  background: red;
+}

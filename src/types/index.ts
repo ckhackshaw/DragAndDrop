@@ -8,3 +8,8 @@ export interface DroppableContainerProp<T> {
 }
 
 export interface ItemPosition {}
+
+export interface MousePosition {
+  x: number;
+  y: number;
+}
