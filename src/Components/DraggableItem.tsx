@@ -12,18 +12,23 @@ interface DraggleItemProps {
 const DraggableItem = ({
   children,
   itemRef,
+  index,
   onDragStart,
   onDragStyle,
 }: DraggleItemProps) => {
   // store the starting mouse position, we use the delta to calculate where items should be
   const startPosition = useRef<MousePosition>();
+
+  // empty image to remove the ghost image
   const emptyImage = document.createElement("img");
   emptyImage.src =
     "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 
-  // first event to be fired when a drag event occurs, we store the original mouse coordinates
+  // first event to be fired when a drag event occurs, we store the original mouse coordinates & the index of the item being dragged
   const startDrag = (e: React.DragEvent) => {
     e.dataTransfer.setDragImage(emptyImage, 0, 0);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", `${index}`);
 
     startPosition.current = { x: e.clientX, y: e.clientY };
     onDragStart();
@@ -44,7 +49,7 @@ const DraggableItem = ({
       // translate the element
       e.target.style.translate = `${xDelta}px ${yDelta}px`;
     }
-    console.log("Item: Dragging Now");
+    // console.log("Item: Dragging Now");
   };
 
   return (

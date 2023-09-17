@@ -17,6 +17,8 @@ const DroppableContainer = ({
     return refContainer.current;
   };
 
+  const dragStyle = "dragging";
+
   // let itemPositions = [];
   // let mousePositionDelta = {};
   const getItemPositions = () => {
@@ -25,12 +27,17 @@ const DroppableContainer = ({
     //   return r.current.getBoundingClientRect();
     // });
     // console.log("Getting item positions", itemPositions);
-    console.log("Map state: ", getDragabbleItemsMap());
   };
+
+  //remove the styles added to the dragged item
   const onDropEvent = (e: React.DragEvent) => {
-    e.clientX;
-    // console.log("Container: Dropping");
+    const index = e.dataTransfer.getData("text/plain");
+    const draggedItem = getDragabbleItemsMap().get(Number(index));
+    draggedItem?.classList.remove(dragStyle);
+    console.log("Container: Dropping", draggedItem);
   };
+
+  //
   const onDragOverEvent = (e: React.DragEvent) => {
     // console.log("Container: Drag Over");
     e.preventDefault();
@@ -59,7 +66,7 @@ const DroppableContainer = ({
           index={i}
           key={i}
           onDragStart={getItemPositions}
-          onDragStyle="dragging"
+          onDragStyle={dragStyle}
         >
           {item.name}
         </DraggleItem>
