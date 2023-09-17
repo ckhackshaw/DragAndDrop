@@ -31,8 +31,8 @@ const DroppableContainer = ({
 
   //remove the styles added to the dragged item
   const onDropEvent = (e: React.DragEvent) => {
-    const index = e.dataTransfer.getData("text/plain");
-    const draggedItem = getDragabbleItemsMap().get(Number(index));
+    const dragData = JSON.parse(e.dataTransfer.getData("text/plain"));
+    const draggedItem = getDragabbleItemsMap().get(Number(dragData.index));
     draggedItem?.classList.remove(dragStyle);
     console.log("Container: Dropping", draggedItem);
   };

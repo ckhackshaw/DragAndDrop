@@ -28,7 +28,12 @@ const DraggableItem = ({
   const startDrag = (e: React.DragEvent) => {
     e.dataTransfer.setDragImage(emptyImage, 0, 0);
     e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData("text/plain", `${index}`);
+    const dragData = {
+      index,
+      mouseStartX: e.clientX,
+      mouseStartY: e.clientY,
+    };
+    e.dataTransfer.setData("text/plain", JSON.stringify(dragData));
 
     startPosition.current = { x: e.clientX, y: e.clientY };
     onDragStart();
